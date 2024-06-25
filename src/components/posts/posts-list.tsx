@@ -12,6 +12,8 @@ export function PostsList() {
     const [favoritePosts, setFavoritePosts] = useState<number[]>([]);
     const [showFavorites, setShowFavorites] = useState<boolean>(false);
     const [searchText, setSearchText] = useState('');
+    const [sortField, setSortField] = useState<string>('id');
+    const [sortDirection, setSortDirection] = useState<string>('asc');
 
     const handleChange = () => {
         setShowFavorites((prev) => !prev);
@@ -38,12 +40,6 @@ export function PostsList() {
         );
     }, [allPosts, users]);
 
-    // const postsWithAuthors =
-    //     allPosts?.map((post) => ({
-    //         ...post,
-    //         author: users?.find((user) => user.id === post.userId)?.name || '',
-    //     })) || [];
-
     console.log('posts', postsWithAuthors);
     console.log('users', users);
     const handlePostsPerPageChange = (
@@ -64,7 +60,20 @@ export function PostsList() {
         setSelectedUserId(authorId);
         setPage(1);
     };
-    const filteredData = () => {
+    const handleSortFieldChange = (field: string) => {
+        setSortField(field);
+        setPage(1);
+    };
+
+    const handleSortDirectionChange = () => {
+        setSortDirection((prevDirection) =>
+            prevDirection === 'asc' ? 'desc' : 'asc'
+        );
+        setPage(1);
+    };
+
+    const getFilteredData = () => {
+        console.log('getFilteredData');
         let filteredPosts = postsWithAuthors;
         if (searchText) {
             filteredPosts = filteredPosts.filter(
@@ -82,17 +91,50 @@ export function PostsList() {
         return filteredPosts;
     };
 
+    const getSortedPosts = () => {
+        console.log('getSortedData');
+        const sortedData = [...getFilteredData()];
+        sortedData.sort((a, b) => {
+            let compareA, compareB;
+            switch (sortField) {
+                case 'id':
+                    compareA = a.id;
+                    compareB = b.id;
+                    break;
+                case 'title':
+                    compareA = a.title.toLowerCase();
+                    compareB = b.title.toLowerCase();
+                    break;
+                case 'author':
+                    compareA = a.author.toLowerCase();
+                    compareB = b.author.toLowerCase();
+                    break;
+                case 'favorite':
+                    compareA = favoritePosts.includes(a.id) ? 0 : 1;
+                    compareB = favoritePosts.includes(b.id) ? 0 : 1;
+                    break;
+                default:
+                    return 0;
+            }
+            if (compareA < compareB) return sortDirection === 'asc' ? -1 : 1;
+            if (compareA > compareB) return sortDirection === 'asc' ? 1 : -1;
+            return 0;
+        });
+        return sortedData;
+    };
+
     const totalPages =
         postsPerPage === 0
             ? 1
-            : Math.ceil(filteredData().length / postsPerPage);
+            : Math.ceil(getFilteredData().length / postsPerPage);
 
     const paginatedPosts = () => {
         if (!allPosts) return [];
-        if (postsPerPage === 0) return filteredData();
+        const sortedPosts = getSortedPosts();
+        if (postsPerPage === 0) return sortedPosts;
         const startIndex = (page - 1) * postsPerPage;
         const endIndex = startIndex + postsPerPage;
-        return filteredData().slice(startIndex, endIndex);
+        return sortedPosts.slice(startIndex, endIndex);
     };
 
     const handleFavoriteChange = (postId: number) => {
@@ -172,6 +214,21 @@ export function PostsList() {
                         checked={showFavorites}
                         onChange={handleChange}
                     />
+                </div>
+                <div>
+                    <span>Сортировка по:</span>
+                    <select
+                        value={sortField}
+                        onChange={(e) => handleSortFieldChange(e.target.value)}
+                    >
+                        <option value='id'>ID</option>
+                        <option value='title'>Название</option>
+                        <option value='author'>Имя пользователя</option>
+                        <option value='favorite'>Избранные</option>
+                    </select>
+                    <button onClick={handleSortDirectionChange}>
+                        {sortDirection === 'asc' ? '↑' : '↓'}
+                    </button>
                 </div>
             </header>
             <h1>Posts</h1>
