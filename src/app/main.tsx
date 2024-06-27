@@ -1,4 +1,6 @@
-import { PostsList } from '../components/posts/posts-list.tsx';
+import './global-styles.css';
+
+import { PostsList } from '../modules/posts/posts-list.tsx';
 import { Provider } from 'react-redux';
 import React from 'react';
 import ReactDOM from 'react-dom/client';

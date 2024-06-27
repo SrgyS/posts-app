@@ -1,0 +1,12 @@
+.iconBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    border-radius: 35%;
+    transition: all 0.3s;
+    width: 30px;
+}
+.iconBtn:hover {
+    background-color: #0057b379;
+}

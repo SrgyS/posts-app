@@ -5,6 +5,6 @@ const baseUrl = 'https://jsonplaceholder.typicode.com';
 
 export const baseApi = createApi({
     baseQuery: fetchBaseQuery({ baseUrl }),
-    tagTypes: ['Posts', 'Users', 'Comments'],
+    tagTypes: ['Post', 'User', 'Comment'],
     endpoints: () => ({}),
 });

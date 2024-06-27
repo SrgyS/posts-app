@@ -1,0 +1,80 @@
+.filterContainer {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 100%;
+}
+.filterRow {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.filterItem {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.filterLabel {
+    font-weight: 600;
+
+    min-width: fit-content;
+}
+
+.filterSelect,
+.filterInput {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    /* max-width: fit-content; */
+}
+.filterSearch {
+    width: 100%;
+}
+.filterSelect:focus,
+.filterInput:focus {
+    outline: none;
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+.sortButton {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    font-size: 14px;
+}
+
+.sortButton:hover {
+    background-color: #0056b3;
+}
+
+@media (max-width: 768px) {
+    .filterRow {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filterLabel {
+        margin-bottom: 5px;
+    }
+
+    .filterSelect,
+    .filterInput {
+        width: 100%;
+    }
+
+    /* .sortButton {
+        margin-left: 0;
+        margin-top: 10px;
+    } */
+}
