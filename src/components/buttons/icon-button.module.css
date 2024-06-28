@@ -7,6 +7,15 @@
     transition: all 0.3s;
     width: 30px;
 }
-.iconBtn:hover {
-    background-color: #0057b379;
+
+@media (hover: hover) {
+    .iconBtn:hover {
+        background-color: #0057b379;
+    }
+}
+
+@media (hover: none) {
+    gi .iconBtn:active {
+        background-color: #0057b379;
+    }
 }
