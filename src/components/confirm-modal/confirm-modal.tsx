@@ -1,9 +1,7 @@
-import { useEffect, useState } from 'react';
-
-import { Button } from '../button/button';
+import { Button } from '../buttons/button';
 import ReactDOM from 'react-dom';
-import s from '../../modules/posts/edit-post-form.module.css';
-import styles from '../../modules/posts/posts-list.module.css';
+import s from './confirm-modal.module.css';
+import { useEffect } from 'react';
 
 type ConfirmModalProps = {
     message: string;
@@ -13,14 +11,6 @@ type ConfirmModalProps = {
     isLoading?: boolean;
 };
 
-export const useModal = () => {
-    const [isOpen, setIsOpen] = useState(false);
-    return {
-        isOpen,
-        open: () => setIsOpen(true),
-        close: () => setIsOpen(false),
-    };
-};
 export const ConfirmModal = ({
     message,
     onConfirm,
@@ -41,15 +31,21 @@ export const ConfirmModal = ({
     if (!isOpen) return null;
 
     return ReactDOM.createPortal(
-        <div className={styles.modalOverlay}>
-            <div className={styles.modal}>
+        <div className={s.modalOverlay}>
+            <div className={s.modal}>
                 <p>{message}</p>
-                <Button onClick={onCancel} className={s.secondaryButton}>
-                    Нет
-                </Button>
-                <Button onClick={onConfirm} className={s.primaryButton}>
-                    {isLoading ? 'Удаление...' : 'Да'}
-                </Button>
+                <div className={s.buttons}>
+                    <Button onClick={onCancel} variant='secondary'>
+                        Нет
+                    </Button>
+                    <Button
+                        onClick={onConfirm}
+                        variant='primary'
+                        disabled={isLoading}
+                    >
+                        {isLoading ? 'Удаление...' : 'Да'}
+                    </Button>
+                </div>
             </div>
         </div>,
         document.body

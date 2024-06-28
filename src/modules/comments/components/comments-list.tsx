@@ -1,5 +1,6 @@
-import { commentsApi } from './api';
-
+import { CommentItem } from './comment-item';
+import { commentsApi } from '../api';
+import s from './comments-list.module.css';
 export function CommentsList({ postId }: { postId: number }) {
     const {
         data: comments,
@@ -10,9 +11,9 @@ export function CommentsList({ postId }: { postId: number }) {
     if (commentsError) return <div>Loading error</div>;
 
     return (
-        <div>
+        <div className={s.container}>
             {comments?.map((comment) => (
-                <div key={comment.id}>{comment.body}</div>
+                <CommentItem key={comment.id} comment={comment} />
             ))}
         </div>
     );

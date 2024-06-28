@@ -1,0 +1,19 @@
+.header {
+    position: fixed;
+    top: 0;
+    max-width: 60rem;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    backdrop-filter: blur(10px);
+}
+
+.btnContainer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 10px 0;
+}
+.btnBox {
+    display: flex;
+    gap: 10px;
+}

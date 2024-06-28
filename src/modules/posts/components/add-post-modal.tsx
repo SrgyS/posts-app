@@ -1,9 +1,9 @@
 import { EditPostForm } from './edit-post-form';
-import { Post } from './posts.slice';
+import { Post } from '../posts.slice';
 import ReactDOM from 'react-dom';
-import { User } from '../users/users.slice';
-import { postsApi } from './api';
-import s from './posts-list.module.css';
+import { User } from '../../users/users.slice';
+import { postsApi } from '../api';
+import s from './add-post-modal.module.css';
 import { useEffect } from 'react';
 
 type AddPostModalProps = {
@@ -40,7 +40,7 @@ export const AddPostModal = ({ users, onClose, isOpen }: AddPostModalProps) => {
         <div className={s.modalOverlay}>
             <div className={s.modal}>
                 <EditPostForm
-                    post={{ userId: 0, title: '', body: '', id: 0 }}
+                    post={{ userId: users[0].id, title: '', body: '', id: 0 }}
                     users={users}
                     onSave={handleAddPost}
                     onCancel={onClose}

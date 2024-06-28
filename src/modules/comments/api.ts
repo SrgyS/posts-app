@@ -9,6 +9,4 @@ export const commentsApi = baseApi.injectEndpoints({
             providesTags: (result) => providesList(result, 'Comment'),
         }),
     }),
-
-    overrideExisting: true,
 });

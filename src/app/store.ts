@@ -5,6 +5,7 @@ import { favoritesSlice } from '../modules/posts/posts.slice';
 export const store = configureStore({
     reducer: {
         favorites: favoritesSlice.reducer,
+
         [baseApi.reducerPath]: baseApi.reducer,
     },
 

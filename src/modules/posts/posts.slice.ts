@@ -18,15 +18,6 @@ export const favoritesSlice = createSlice({
         removeFromFavorites: (state, action: PayloadAction<number[]>) => {
             return state.filter((id) => !action.payload.includes(id));
         },
-        //   toggleFavorites: (state, action: PayloadAction<number[]>) => {
-        //     return action.payload.reduce((acc, id) => {
-        //       if (acc.includes(id)) {
-        //         return acc.filter(favId => favId !== id);
-        //       } else {
-        //         return [...acc, id];
-        //       }
-        //     }, state);
-        //   },
     },
 });
 

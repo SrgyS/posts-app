@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-import { Button } from '../../components/button/button';
-import { Post } from './posts.slice';
-import { User } from '../users/users.slice';
+import { Button } from '../../../components/buttons/button';
+import { Post } from '../posts.slice';
+import { User } from '../../users/users.slice';
 import s from './edit-post-form.module.css';
 
 type EditPostFormProps = {
@@ -25,7 +25,6 @@ export const EditPostForm = ({
     const [userId, setUserId] = useState(post.userId);
 
     useEffect(() => {
-        // Обновляем состояние, когда пост меняется
         setTitle(post.title);
         setBody(post.body);
         setUserId(post.userId);
@@ -82,16 +81,10 @@ export const EditPostForm = ({
                 </select>
             </div>
             <div className={s.btnContainer}>
-                <Button
-                    onClick={onCancel}
-                    className={`${s.button} ${s.secondaryButton}`}
-                >
+                <Button onClick={onCancel} variant='secondary'>
                     Отменить
                 </Button>
-                <Button
-                    type={'submit'}
-                    className={`${s.button} ${s.primaryButton}`}
-                >
+                <Button type='submit' variant='primary'>
                     {isAdd ? 'Опубликовать' : ' Сохранить'}
                 </Button>
             </div>

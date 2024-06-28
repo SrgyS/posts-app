@@ -48,23 +48,6 @@
     transition: background-color 0.3s ease;
 }
 
-.primaryButton {
-    background-color: #007bff;
-    color: white;
-}
-
-.primaryButton:hover {
-    background-color: #0056b3;
-}
-
-.secondaryButton {
-    background-color: #6c757d;
-    color: white;
-}
-
-.secondaryButton:hover {
-    background-color: #545b62;
-}
 .btnContainer {
     display: flex;
     align-items: center;

@@ -52,7 +52,7 @@ export const postsApi = baseApi.injectEndpoints({
                 body: newPost,
             }),
             // invalidatesTags: [{ type: 'Post', id: 'LIST' }],
-            async onQueryStarted(newPost, { dispatch, queryFulfilled }) {
+            async onQueryStarted(_newPost, { dispatch, queryFulfilled }) {
                 try {
                     const { data: createdPost } = await queryFulfilled;
                     dispatch(
@@ -64,8 +64,8 @@ export const postsApi = baseApi.injectEndpoints({
                             }
                         )
                     );
-                } catch {
-                    // В случае ошибки ничего не делаем, так как мы не добавляли пост в кэш
+                } catch (err) {
+                    console.log(err);
                 }
             },
         }),
@@ -76,11 +76,11 @@ export const postsApi = baseApi.injectEndpoints({
                     method: 'DELETE',
                 };
             },
-            transformResponse: (response, meta, arg) => ({
-                success: true,
-                id: arg,
-            }),
-            invalidatesTags: (result, error, id) => [{ type: 'Post', id }],
+            // transformResponse: (response, meta, arg) => ({
+            //     success: true,
+            //     id: arg,
+            // }),
+            // invalidatesTags: (result, error, id) => [{ type: 'Post', id }],
 
             async onQueryStarted(id, { dispatch, queryFulfilled }) {
                 const patchResult = dispatch(
@@ -99,6 +99,4 @@ export const postsApi = baseApi.injectEndpoints({
             },
         }),
     }),
-
-    overrideExisting: true,
 });

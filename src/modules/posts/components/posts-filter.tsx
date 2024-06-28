@@ -1,10 +1,10 @@
 import {
     getPostsPerPageFromStorage,
     setPostsPerPageToStorage,
-} from '../../utils/local-storage';
+} from '../../../utils/local-storage';
 import { useEffect, useState } from 'react';
 
-import { User } from '../users/users.slice';
+import { User } from '../../users/users.slice';
 import s from './posts-filter.module.css';
 
 type PostsFilterProps = {

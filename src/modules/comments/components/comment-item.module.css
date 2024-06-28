@@ -1,0 +1,13 @@
+.comment {
+    padding: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.infoRow {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 9px;
+    font-style: italic;
+}
