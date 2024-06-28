@@ -12,22 +12,16 @@
     color: white;
 }
 
-.primary:hover {
-    background-color: #0056b3;
-}
-.delete {
-    background-color: #dc3545;
-    color: white;
-}
-
-.delete:hover {
-    background-color: #8e1f2a;
-}
 .secondary {
     background-color: #6c757d;
     color: white;
 }
 
-.secondary:hover {
-    background-color: #545b62;
+@media (hover: hover) {
+    .primary:hover {
+        background-color: #0056b3;
+    }
+    .secondary:hover {
+        background-color: #545b62;
+    }
 }
