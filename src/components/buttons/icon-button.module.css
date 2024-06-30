@@ -15,7 +15,7 @@
 }
 
 @media (hover: none) {
-    gi .iconBtn:active {
+    .iconBtn:active {
         background-color: #0057b379;
     }
 }
