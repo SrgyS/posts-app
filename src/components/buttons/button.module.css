@@ -24,7 +24,6 @@
     .secondary:hover {
         background-color: #545b62;
     }
-<<<<<<< HEAD
 }
 
 @media (hover: none) {
@@ -34,6 +33,4 @@
     .secondary:active {
         background-color: #6c757d;
     }
-=======
->>>>>>> a199175ea745c39baf25924cafce7332704d00b7
 }
