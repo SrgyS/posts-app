@@ -2,12 +2,14 @@ import { Post, addToFavorites, removeFromFavorites } from '../posts.slice';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { CommentsList } from '../../comments/components/comments-list';
+import { ConfirmModal } from '../../../components/confirm-modal/confirm-modal';
 import { EditPostForm } from './edit-post-form';
 import { IconButton } from '../../../components/buttons/icon-button';
 import { RootState } from '../../../app/store';
 import { User } from '../../users/users.slice';
 import { postsApi } from '../api';
 import s from './posts.module.css';
+import { useModal } from '../../../hooks/useModal';
 import { useState } from 'react';
 
 export const PostItem = ({
@@ -42,9 +44,8 @@ export const PostItem = ({
     const handleDeletePost = async (postId: number) => {
         try {
             await deletePost(postId).unwrap();
-            console.log('Post deleted successfully');
         } catch (error) {
-            console.log('Failed to delete the post');
+            console.error('Failed to delete the post');
         }
     };
     const [updatePost] = postsApi.useUpdatePostMutation();
@@ -53,13 +54,14 @@ export const PostItem = ({
         try {
             await updatePost(updatedPost).unwrap();
             setIsEdit(false);
-            console.log('Updated post successfully');
         } catch (error) {
             console.error('Failed to update the post:', error);
         }
     };
     const onCancel = () => setIsEdit(false);
     const onCommentsToggle = () => setShowComments(!showComments);
+
+    const deleteModal = useModal();
 
     if (!post) {
         return <div>No post</div>;
@@ -110,7 +112,7 @@ export const PostItem = ({
                             />
                             <IconButton
                                 action='delete'
-                                onClick={() => handleDeletePost(post.id)}
+                                onClick={deleteModal.open}
                                 label='Удалить'
                                 disabled={isDeleting}
                             />
@@ -125,6 +127,13 @@ export const PostItem = ({
                                 }
                             />
                         </div>
+                        <ConfirmModal
+                            isOpen={deleteModal.isOpen}
+                            message='Вы уверены, что хотите удалить выбранный пост?'
+                            onCancel={deleteModal.close}
+                            onConfirm={() => handleDeletePost(post.id)}
+                            isLoading={isDeleting}
+                        />
 
                         {showComments ? (
                             <CommentsList postId={post.id} />

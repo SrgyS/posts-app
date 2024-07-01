@@ -69,9 +69,6 @@ export function PostsPage() {
         );
     }, [allPosts, users]);
 
-    console.log('posts', postsWithAuthors);
-    console.log('users', users);
-
     const handlePageChange = (newPage: number) => {
         setPage(newPage);
     };
@@ -106,8 +103,6 @@ export function PostsPage() {
     const favoriteModal = useModal();
 
     const handleConfirmDelete = async () => {
-        console.log('Deleting posts:', checkedPosts);
-
         try {
             const deletePromises = checkedPosts.map((postId) =>
                 deletePost(postId).unwrap()
@@ -124,7 +119,7 @@ export function PostsPage() {
 
     const handleConfirmFavorite = () => {
         dispatch(addToFavorites(checkedPosts));
-        console.log('favorite', checkedPosts);
+
         setCheckedPosts([]);
         favoriteModal.close();
     };
@@ -141,7 +136,6 @@ export function PostsPage() {
         return <div className={s.loader}>Loading...</div>;
     }
     if (postsError) {
-        console.log('error', postsError);
         return <Error message='Error loading posts' />;
     }
 

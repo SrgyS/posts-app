@@ -13,7 +13,6 @@ export const useFilteredPosts = ({
     showFavorites,
     favoritePosts,
 }: UseFilteredPostsProps) => {
-    console.log('getFilteredData');
     return useMemo(() => {
         let filteredPosts = posts;
         if (searchText) {

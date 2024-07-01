@@ -19,7 +19,6 @@ export const AddPostModal = ({ users, onClose, isOpen }: AddPostModalProps) => {
         try {
             await addPost(newPost).unwrap();
             onClose();
-            console.log('Add post successfully');
         } catch (error) {
             console.error('Failed to add the post:', error);
         }

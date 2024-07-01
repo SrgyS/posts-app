@@ -65,7 +65,7 @@ export const postsApi = baseApi.injectEndpoints({
                         )
                     );
                 } catch (err) {
-                    console.log(err);
+                    console.error(err);
                 }
             },
         }),
