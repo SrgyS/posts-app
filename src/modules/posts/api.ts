@@ -70,31 +70,29 @@ export const postsApi = baseApi.injectEndpoints({
             },
         }),
         deletePost: build.mutation<{ success: boolean; id: number }, number>({
-            query(id) {
-                return {
-                    url: `posts/${id}`,
-                    method: 'DELETE',
-                };
-            },
-            // transformResponse: (response, meta, arg) => ({
-            //     success: true,
-            //     id: arg,
-            // }),
-            // invalidatesTags: (result, error, id) => [{ type: 'Post', id }],
-
+            query: (id) => ({
+                url: `posts/${id}`,
+                method: 'DELETE',
+            }),
             async onQueryStarted(id, { dispatch, queryFulfilled }) {
-                const patchResult = dispatch(
-                    postsApi.util.updateQueryData('getPosts', null, (draft) => {
-                        const index = draft.findIndex((post) => post.id === id);
-                        if (index !== -1) {
-                            draft.splice(index, 1);
-                        }
-                    })
-                );
                 try {
                     await queryFulfilled;
-                } catch {
-                    patchResult.undo();
+                    dispatch(
+                        postsApi.util.updateQueryData(
+                            'getPosts',
+                            null,
+                            (draft) => {
+                                const index = draft.findIndex(
+                                    (post) => post.id === id
+                                );
+                                if (index !== -1) {
+                                    draft.splice(index, 1);
+                                }
+                            }
+                        )
+                    );
+                } catch (err) {
+                    console.error(err);
                 }
             },
         }),

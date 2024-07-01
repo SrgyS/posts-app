@@ -9,6 +9,13 @@
     max-width: 60rem;
     position: relative;
 }
+.errorContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10vh;
+}
 .loader {
     width: 100%;
     display: flex;

@@ -69,7 +69,29 @@
 .active {
     background-color: #52de808d;
 }
+.errorMessage {
+    position: fixed;
+    top: 20px;
+    right: -350px;
+    background-color: #ffffff;
+    color: rgb(232, 16, 16);
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    animation: slideIn 0.5s forwards, slideOut 0.5s 1.5s forwards;
+}
 
+@keyframes slideIn {
+    to {
+        right: 20px;
+    }
+}
+
+@keyframes slideOut {
+    to {
+        right: -300px;
+    }
+}
 @media (max-width: 768px) {
     .postItem {
         padding: 15px;

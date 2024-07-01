@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useMemo, useState } from 'react';
 
 import { AddPostModal } from '../../modules/posts/components/add-post-modal';
+import { Button } from '../../components/buttons/button';
 import { ConfirmModal } from '../../components/confirm-modal/confirm-modal';
 import { Error } from '../../components/error/error';
 import { Header } from '../../pages/posts-page/components/header';
@@ -110,7 +111,6 @@ export function PostsPage() {
             await Promise.all(deletePromises);
             setCheckedPosts([]);
         } catch (error) {
-            console.error('Failed to delete some posts:', error);
             setShowError('Failed to delete some posts');
         } finally {
             deleteModal.close();
@@ -136,7 +136,18 @@ export function PostsPage() {
         return <div className={s.loader}>Loading...</div>;
     }
     if (postsError) {
-        return <Error message='Error loading posts' />;
+        return (
+            <div className={s.errorContainer}>
+                <Error message='Error loading posts' />
+
+                <Button
+                    variant='primary'
+                    onClick={() => window.location.reload()}
+                >
+                    На главную
+                </Button>
+            </div>
+        );
     }
 
     if (usersError) {
